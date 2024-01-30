@@ -12,7 +12,12 @@ public class Temporizador {
 	private int hours;
 	private int minutes;
 	private int seconds;
+	private boolean pomodoroMode1;
+
 	private Timer timer;
+
+	// TODO implements milliseconds. In the actual code, user can change start/pause
+	// quickly, making the timer not run
 
 	public Temporizador() {
 
@@ -48,6 +53,14 @@ public class Temporizador {
 		this.seconds = seconds;
 	}
 
+	public boolean isPomodoroMode1() {
+		return pomodoroMode1;
+	}
+
+	public void setPomodoroMode1(boolean pomodoroMode1) {
+		this.pomodoroMode1 = pomodoroMode1;
+	}
+
 	public Timer getTimer() {
 		return timer;
 	}
@@ -56,42 +69,50 @@ public class Temporizador {
 		timer = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent e) {
+
+				if (seconds == 0) {
+					if (minutes > 0) {
+						minutes--;
+					} else {
+						hours--;
+						updateText(hoursField, hours);
+						minutes = 59;
+					}
+					updateText(minutesField, minutes);
+					seconds = 60;
+				}
+				seconds--;
+				updateText(secondsField, seconds);
+
 				if (hours == 0 && minutes == 0 && seconds == 0) {
 					timer.stop();
-					System.out.println("Alarme");
 					playSound();
-				} else {
-					if (seconds == 0) {
-						if (minutes > 0) {
-							minutes--;
-						} else {
-							hours--;
-							minutes = 1;
-							updateText(hoursField, hours);
-						}
-						updateText(minutesField, minutes);
-						seconds = 60;
+					try {
+						Thread.sleep(2000);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
 					}
-					seconds--;
 
-					updateText(secondsField, seconds);
-
+					if (pomodoroMode1) {
+						minutes = 5;
+						updateText(minutesField, minutes);
+						timer.start();
+					}
 				}
 			}
+
 		});
 	}
 
 	public void updateText(TextField field, int value) {
-		if (value < 10) {
-			field.setText("0" + value);
-		} else {
-			field.setText(Integer.toString(value));
-		}
-
+		String newText = value < 10 ? "0" + value : Integer.toString(value);
+		field.setText(newText);
 	}
 
 	public void playSound() {
-		AudioClip buzzer = new AudioClip(getClass().getResource("../resources/bell.mp3").toExternalForm());
+		String sound = "../resources/" + (pomodoroMode1 ? "break.mp3" : "bell.mp3");
+
+		AudioClip buzzer = new AudioClip(getClass().getResource(sound).toExternalForm());
 		buzzer.play();
 	}
 
