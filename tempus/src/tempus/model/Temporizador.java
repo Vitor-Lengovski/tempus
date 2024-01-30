@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 import javafx.scene.control.TextField;
+import javafx.scene.media.AudioClip;
 
 public class Temporizador {
 
@@ -14,7 +15,7 @@ public class Temporizador {
 	private Timer timer;
 
 	public Temporizador() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Temporizador(int hours, int minutes, int seconds) {
@@ -22,8 +23,7 @@ public class Temporizador {
 		this.minutes = minutes;
 		this.seconds = seconds;
 	}
-	
-	
+
 	public int getHours() {
 		return hours;
 	}
@@ -53,31 +53,46 @@ public class Temporizador {
 	}
 
 	public void setTimer(TextField hoursField, TextField minutesField, TextField secondsField) {
-		timer = new Timer(500, new ActionListener() {
-	    	@Override
-	    	public void actionPerformed(java.awt.event.ActionEvent e) {
-	    		if(hours == 0 && minutes == 0 && seconds == 0) {
-	    			timer.stop();
-	    			System.out.println("Alarme");
-	    		} else {
-	    			if(seconds <= 0) {
-	    				seconds = 60;
-	    				minutes--;
-	    			}
-	    			if(minutes < 0) {
-	    				minutes = 1;
-	    				hours--;
-	    			}
+		timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent e) {
+				if (hours == 0 && minutes == 0 && seconds == 0) {
+					timer.stop();
+					System.out.println("Alarme");
+					playSound();
+				} else {
+					if (seconds == 0) {
+						if (minutes > 0) {
+							minutes--;
+						} else {
+							hours--;
+							minutes = 1;
+							updateText(hoursField, hours);
+						}
+						updateText(minutesField, minutes);
+						seconds = 60;
+					}
+					seconds--;
 
-		    		seconds--;
-	    		}
-	    		secondsField.setText(Integer.toString(seconds));
-	    		minutesField.setText(Integer.toString(minutes));
-	    		hoursField.setText(Integer.toString(hours));
-	    	}
-	    });
+					updateText(secondsField, seconds);
+
+				}
+			}
+		});
 	}
 
+	public void updateText(TextField field, int value) {
+		if (value < 10) {
+			field.setText("0" + value);
+		} else {
+			field.setText(Integer.toString(value));
+		}
 
+	}
+
+	public void playSound() {
+		AudioClip buzzer = new AudioClip(getClass().getResource("../resources/bell.mp3").toExternalForm());
+		buzzer.play();
+	}
 
 }
