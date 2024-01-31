@@ -45,24 +45,36 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tempus.controller.HomeController">
   <children>
-    <MenuBar style="-fx-background-color: rgb(122, 0, 0);" VBox.vgrow="NEVER">
+    <MenuBar cacheShape="false" centerShape="false" depthTest="DISABLE" focusTraversable="false" pickOnBounds="false" scaleShape="false" style="-fx-background-color: rgb(122, 0, 0);" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false">
                <graphic>
-                  <Button fx:id="pomodoroModeBtn" alignment="CENTER" mnemonicParsing="false" onAction="#choosePomodoroMode" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white; -fx-border-radius: 3; -fx-focus-color: transparent;" text="Pomodoro" textAlignment="CENTER">
+                  <Button fx:id="pomodoroModeBtn" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" minHeight="-Infinity" minWidth="82.0" mnemonicParsing="false" onAction="#choosePomodoroMode" pickOnBounds="false" scaleShape="false" style="-fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white; -fx-border-radius: 3; -fx-focus-color: white;" text="Pomodoro" textAlignment="CENTER">
                      <font>
-                        <Font name="Sarai" size="17.0" />
+                        <Font name="Liberation Serif" size="15.0" />
                      </font>
                      <padding>
                         <Insets bottom="1.0" left="2.0" right="2.0" top="1.0" />
                      </padding></Button>
                </graphic>
         </Menu>
+            <Menu mnemonicParsing="false">
+               <graphic>
+                  <Button fx:id="cronometerBtn" alignment="CENTER" cacheShape="false" centerShape="false" focusTraversable="false" minWidth="82.0" mnemonicParsing="false" onAction="#chooseCronometerMode" pickOnBounds="false" scaleShape="false" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white; -fx-border-radius: 3; -fx-focus-color: transparent;" text="Cronômetro" textAlignment="CENTER">
+                     <font>
+                        <Font name="Liberation Serif" size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="1.0" left="2.0" right="2.0" top="1.0" />
+                     </padding>
+                  </Button>
+               </graphic>
+            </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="498.0" style="-fx-background-color: rgb(155, 3, 1);" VBox.vgrow="ALWAYS">
+    <AnchorPane fx:id="pane" centerShape="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="373.0" prefWidth="498.0" scaleShape="false" style="-fx-background-color: rgb(155, 3, 1);" VBox.vgrow="ALWAYS">
       <children>
-            <TextField fx:id="hoursField" layoutX="78.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" prefHeight="56.0" prefWidth="72.0" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="00">
+            <TextField fx:id="hoursField" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="78.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" pickOnBounds="false" prefHeight="56.0" prefWidth="72.0" scaleShape="false" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="00">
                <font>
                   <Font name="Ubuntu Mono Bold" size="72.0" />
                </font>
@@ -72,22 +84,22 @@
                   <Font name="Serif Regular" size="72.0" />
                </font>
             </Text>
-            <TextField fx:id="minutesField" layoutX="182.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" prefHeight="56.0" prefWidth="72.0" promptText="01" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="25">
+            <TextField fx:id="minutesField" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="182.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" pickOnBounds="false" prefHeight="56.0" prefWidth="72.0" promptText="01" scaleShape="false" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="25">
                <font>
                   <Font name="Ubuntu Mono Bold" size="72.0" />
                </font>
             </TextField>
-            <TextField fx:id="secondsField" layoutX="288.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" prefHeight="56.0" prefWidth="72.0" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="00">
+            <TextField fx:id="secondsField" cacheShape="false" centerShape="false" focusTraversable="false" layoutX="288.0" layoutY="135.0" minHeight="-Infinity" minWidth="-Infinity" onKeyTyped="#validate" pickOnBounds="false" prefHeight="56.0" prefWidth="72.0" scaleShape="false" style="-fx-padding: -1; -fx-background-color: rgba(0,0,0,0); -fx-border-color: transparent transparent red transparent; -fx-text-fill: rgb(252, 97, 91);" text="00">
                <font>
                   <Font name="Ubuntu Mono Bold" size="72.0" />
                </font>
             </TextField>
-            <Button fx:id="startBtn" alignment="CENTER" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="131.0" layoutY="235.0" mnemonicParsing="false" onAction="#startTimer" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white;" text="Iniciar" textAlignment="CENTER" />
-            <Button fx:id="resetBtn" alignment="CENTER" contentDisplay="CENTER" layoutX="227.0" layoutY="235.0" mnemonicParsing="false" onAction="#resetTimer" prefHeight="26.0" prefWidth="83.0" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white;" text="Zerar" textAlignment="CENTER">
+            <Button fx:id="startBtn" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="0.0" layoutX="131.0" layoutY="235.0" mnemonicParsing="false" onAction="#startTimer" pickOnBounds="false" prefHeight="26.0" prefWidth="83.0" scaleShape="false" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white;" text="Iniciar" textAlignment="CENTER" />
+            <Button fx:id="resetBtn" alignment="CENTER" cacheShape="false" centerShape="false" contentDisplay="CENTER" focusTraversable="false" layoutX="227.0" layoutY="235.0" mnemonicParsing="false" onAction="#resetTimer" pickOnBounds="false" prefHeight="26.0" prefWidth="83.0" scaleShape="false" style="-fx-background-radius: 0; -fx-background-color: transparent; -fx-border-color: gray; -fx-text-fill: white;" text="Zerar" textAlignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets></Button>
-            <VBox id="menuEsquerda" layoutX="498.0" prefHeight="373.0" prefWidth="142.0" style="-fx-background-color: rgb(188, 6, 2);">
+            <VBox cacheShape="false" centerShape="false" layoutX="498.0" pickOnBounds="false" prefHeight="373.0" prefWidth="142.0" scaleShape="false" style="-fx-background-color: rgb(188, 6, 2);">
                <children>
                   <Label fx:id="objectivesLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="159.0" text="Objetivos" textFill="#e4cece">
                      <font>

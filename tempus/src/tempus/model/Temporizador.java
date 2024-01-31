@@ -7,11 +7,9 @@ import javax.swing.Timer;
 import javafx.scene.control.TextField;
 import javafx.scene.media.AudioClip;
 
-public class Temporizador {
+public class Temporizador extends Timekeeper{
 
-	private int hours;
-	private int minutes;
-	private int seconds;
+	
 	private boolean pomodoroMode1;
 
 	private Timer timer;
@@ -24,33 +22,7 @@ public class Temporizador {
 	}
 
 	public Temporizador(int hours, int minutes, int seconds) {
-		this.hours = hours;
-		this.minutes = minutes;
-		this.seconds = seconds;
-	}
-
-	public int getHours() {
-		return hours;
-	}
-
-	public void setHours(int hours) {
-		this.hours = hours;
-	}
-
-	public int getMinutes() {
-		return minutes;
-	}
-
-	public void setMinutes(int minutes) {
-		this.minutes = minutes;
-	}
-
-	public int getSeconds() {
-		return seconds;
-	}
-
-	public void setSeconds(int seconds) {
-		this.seconds = seconds;
+		super(hours, minutes, seconds);
 	}
 
 	public boolean isPomodoroMode1() {
@@ -108,7 +80,7 @@ public class Temporizador {
 		String newText = value < 10 ? "0" + value : Integer.toString(value);
 		field.setText(newText);
 	}
-
+	
 	public void playSound() {
 		String sound = "../resources/" + (pomodoroMode1 ? "break.mp3" : "bell.mp3");
 
