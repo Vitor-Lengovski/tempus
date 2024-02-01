@@ -12,7 +12,7 @@ public class Chronometer extends Timekeeper{
 	private Timer cronometer;
 
 	public Chronometer() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Chronometer(int hours, int minutes, int seconds) {

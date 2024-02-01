@@ -7,10 +7,10 @@ import javax.swing.Timer;
 import javafx.scene.control.TextField;
 import javafx.scene.media.AudioClip;
 
-public class Temporizador extends Timekeeper{
+public class Temporizador extends Timekeeper {
 
-	
 	private boolean pomodoroMode1;
+	private boolean isBreakTime;
 
 	private Timer timer;
 
@@ -21,8 +21,9 @@ public class Temporizador extends Timekeeper{
 
 	}
 
-	public Temporizador(int hours, int minutes, int seconds) {
+	public Temporizador(int hours, int minutes, int seconds, boolean pomodoroMode1) {
 		super(hours, minutes, seconds);
+		this.pomodoroMode1 = pomodoroMode1;
 	}
 
 	public boolean isPomodoroMode1() {
@@ -31,6 +32,14 @@ public class Temporizador extends Timekeeper{
 
 	public void setPomodoroMode1(boolean pomodoroMode1) {
 		this.pomodoroMode1 = pomodoroMode1;
+	}
+
+	public boolean isBreakTime() {
+		return isBreakTime;
+	}
+
+	public void setBreakTime(boolean isBreakTime) {
+		this.isBreakTime = isBreakTime;
 	}
 
 	public Timer getTimer() {
@@ -58,6 +67,10 @@ public class Temporizador extends Timekeeper{
 
 				if (hours == 0 && minutes == 0 && seconds == 0) {
 					timer.stop();
+					isBreakTime = pomodoroMode1 ? true : false;
+					System.out.println("Zerado");
+					System.out.println("break? " + isBreakTime);
+					System.out.println("Pomodoro? " + pomodoroMode1 + "\n");
 					playSound();
 					try {
 						Thread.sleep(2000);
@@ -65,12 +78,20 @@ public class Temporizador extends Timekeeper{
 						e1.printStackTrace();
 					}
 
-					if (pomodoroMode1) {
+					if (pomodoroMode1 && isBreakTime == true) {
+						isBreakTime = false;
+						pomodoroMode1 = false;
+						System.out.println("Break started\n break? " + isBreakTime);
+						System.out.println("Pomodoro? " + pomodoroMode1 + "\n");
 						minutes = 5;
 						updateText(minutesField, minutes);
 						timer.start();
 					}
 				}
+				
+				System.out.println("Running");
+				System.out.println("break? " + isBreakTime);
+				System.out.println("Pomodoro? " + pomodoroMode1 + "\n");
 			}
 
 		});
@@ -80,7 +101,7 @@ public class Temporizador extends Timekeeper{
 		String newText = value < 10 ? "0" + value : Integer.toString(value);
 		field.setText(newText);
 	}
-	
+
 	public void playSound() {
 		String sound = "../resources/" + (pomodoroMode1 ? "break.mp3" : "bell.mp3");
 

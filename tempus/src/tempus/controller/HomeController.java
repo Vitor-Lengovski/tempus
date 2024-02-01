@@ -69,7 +69,7 @@ public class HomeController implements Initializable {
 		}
 		mode = 1;
 		changeStartButton("Iniciar");
-		timer = new Temporizador(0, 25, 0);
+		timer = new Temporizador(0, 25, 0, true);
 		updateAllFields(0, 25, 0);
 		tempo = timer.getTimer();
 		pomodoroModeBtn.setStyle("-fx-background-color: rgb(133, 255, 255)");
@@ -85,9 +85,7 @@ public class HomeController implements Initializable {
 
 		if (mode == 1) {
 			if (hours != 0 || minutes != 0 || seconds != 0) {
-				timer = new Temporizador(hours, minutes, seconds);
-				timer.setPomodoroMode1(true);
-
+				timer = new Temporizador(hours, minutes, seconds, (mode == 1 ? true : false) );
 				timer.setTimer(hoursField, minutesField, secondsField);
 				tempo = timer.getTimer();
 				changeFieldsEditability(false);
@@ -122,7 +120,7 @@ public class HomeController implements Initializable {
 			changeStartButton("Iniciar");
 			changeFieldsEditability(true);
 
-			timer = new Temporizador(0, 0, 0);
+			timer = new Temporizador(0, 0, 0, false);
 			updateAllFields(0, 0, 0);
 		}
 	}
@@ -158,7 +156,7 @@ public class HomeController implements Initializable {
 		minutes = Integer.parseInt(minutesField.getText());
 		hours = Integer.parseInt(hoursField.getText());
 		mode = 1;
-		timer = new Temporizador(hours, minutes, seconds);
+		timer = new Temporizador(hours, minutes, seconds, false);
 		timer.setTimer(hoursField, minutesField, secondsField);
 		tempo = timer.getTimer();
 	}
