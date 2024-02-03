@@ -21,6 +21,10 @@ public class Temporizador extends Timekeeper {
 
 	}
 
+	public Temporizador(int hours, int minutes, int seconds) {
+		super(hours, minutes, seconds);
+	}
+
 	public Temporizador(int hours, int minutes, int seconds, boolean pomodoroMode1) {
 		super(hours, minutes, seconds);
 		this.pomodoroMode1 = pomodoroMode1;
@@ -68,9 +72,6 @@ public class Temporizador extends Timekeeper {
 				if (hours == 0 && minutes == 0 && seconds == 0) {
 					timer.stop();
 					isBreakTime = pomodoroMode1 ? true : false;
-					System.out.println("Zerado");
-					System.out.println("break? " + isBreakTime);
-					System.out.println("Pomodoro? " + pomodoroMode1 + "\n");
 					playSound();
 					try {
 						Thread.sleep(2000);
@@ -88,10 +89,7 @@ public class Temporizador extends Timekeeper {
 						timer.start();
 					}
 				}
-				
-				System.out.println("Running");
-				System.out.println("break? " + isBreakTime);
-				System.out.println("Pomodoro? " + pomodoroMode1 + "\n");
+
 			}
 
 		});

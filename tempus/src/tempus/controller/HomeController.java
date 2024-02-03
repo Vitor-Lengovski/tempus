@@ -40,7 +40,7 @@ public class HomeController implements Initializable {
 	Temporizador timer;
 	Chronometer cronometer;
 
-	int mode;
+	int mode;	//0 = standard timer, 1 = pomodoro mode, 2 = chronometer mode
 	int seconds;
 	int minutes;
 	int hours;
@@ -83,24 +83,23 @@ public class HomeController implements Initializable {
 		minutes = Integer.parseInt(minutesField.getText());
 		hours = Integer.parseInt(hoursField.getText());
 
-		if (mode == 1) {
+		if (mode == 1 || mode == 0) {
 			if (hours != 0 || minutes != 0 || seconds != 0) {
-				timer = new Temporizador(hours, minutes, seconds, (mode == 1 ? true : false) );
+				timer.setHours(hours);
+				timer.setMinutes(minutes);
+				timer.setSeconds(seconds);
 				timer.setTimer(hoursField, minutesField, secondsField);
 				tempo = timer.getTimer();
-				changeFieldsEditability(false);
-				tempo.start();
-				changeStartButton("Pausar");
 			}
-
 		} else if (mode == 2) {
 			cronometer = new Chronometer(hours, minutes, seconds);
 			cronometer.setCronometer(hoursField, minutesField, secondsField);
 			tempo = cronometer.getCronometer();
-			tempo.start();
-			changeStartButton("Pausar");
+			
 		}
-
+		changeFieldsEditability(false);
+		tempo.start();
+		changeStartButton("Pausar");
 	}
 
 	@FXML
@@ -155,7 +154,7 @@ public class HomeController implements Initializable {
 		seconds = Integer.parseInt(secondsField.getText());
 		minutes = Integer.parseInt(minutesField.getText());
 		hours = Integer.parseInt(hoursField.getText());
-		mode = 1;
+		mode = 0;
 		timer = new Temporizador(hours, minutes, seconds, false);
 		timer.setTimer(hoursField, minutesField, secondsField);
 		tempo = timer.getTimer();
